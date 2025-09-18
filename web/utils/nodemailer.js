@@ -11,8 +11,8 @@ const smtp_port = process.env.SMTP_PORT;
 
 const transporter = nodemailer.createTransport({
   host: smtp_host,
-  port: smtp_port,             
-  secure: (smtp_port === 465 ? true : false),   
+  port: smtp_port,
+  secure: (smtp_port === 465 ? true : false),
   auth: {
     user: smtp_user,
     pass: smtp_pass,
@@ -76,9 +76,15 @@ export async function sendMail() {
       </div>
     `;
 
+    const recipients = [
+      "sahilpanjwani195@gmail.com",
+      "alamomair724@gmail.com",
+      "kambojkalrikamboj@gmail.com",
+    ];
+
     await transporter.sendMail({
       from: '"Store Monitor Alert" <s.p.s.a.h.i.l.p.a.n.j.w.a.n.i@gmail.com>',
-      to: "sahilpanjwani195@gmail.com",
+      to: recipients,
       subject: "🔔 Store Alert: No Orders in Last 15 Minutes",
       text: `Store Activity Alert
 
