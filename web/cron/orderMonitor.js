@@ -18,7 +18,7 @@ export async function cronTask() {
 }
 
 
-// // Runs every 15 minutes
+// Runs every 15 minutes
 const task = cron.schedule("*/15 * * * *", cronTask);
 
 task.start();

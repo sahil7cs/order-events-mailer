@@ -1,4 +1,8 @@
-import AxiosInstance from "./axios.js";
+import axios from "axios";
+import dotenv from "dotenv";
+import path from 'path';
+
+dotenv.config({ path: path.resolve(process.cwd(), ".env") });
 
 export async function isOrderWithin(time) {
   try {
@@ -21,16 +25,30 @@ export async function isOrderWithin(time) {
       query: `created_at:>="${since}"`,
     };
 
-    const res = await AxiosInstance.post("", {
-      query,
-      variables,
-    });
+    const data = JSON.stringify({ query, variables });
 
-    const orders = res.data?.data?.orders?.nodes || [];
+    // Axios config
+    const config = {
+      method: "post",
+      maxBodyLength: Infinity,
+      url: `${process.env.BASE_URL}/admin/api/${process.env.API_VERSION}/graphql.json`,
+      headers: {
+        "X-Shopify-Access-Token": process.env.AT,
+        "Content-Type": "application/json",
+      },
+      data: data,
+    };
+
+    const response = await axios.request(config);
+
+    const orders = response?.data?.data?.orders?.nodes || [];
 
     return orders.length > 0;
   } catch (error) {
-    console.error("Error getting recent orders count:", error?.response?.data || error.message);
+    console.error(
+      "Error getting recent orders count:",
+      error?.response?.data || error.message
+    );
     throw error;
   }
 }

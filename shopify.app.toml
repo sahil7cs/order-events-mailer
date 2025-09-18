@@ -3,7 +3,7 @@
 client_id = "a50957ed62747bab4375a7d2f4636284"
 name = "sahil-test"
 handle = "sahil-test-3"
-application_url = "https://mercy-devoted-ambient-educated.trycloudflare.com"
+application_url = "https://producer-these-presence-harbor.trycloudflare.com"
 embedded = true
 
 [webhooks] 
@@ -14,10 +14,10 @@ api_version = "2025-07"
 scopes = "read_customer_events,read_orders,read_products,write_discounts,write_pixels"
 
 [auth]
-redirect_urls = ["https://mercy-devoted-ambient-educated.trycloudflare.com/auth/callback", "https://mercy-devoted-ambient-educated.trycloudflare.com/auth/shopify/callback", "https://mercy-devoted-ambient-educated.trycloudflare.com/api/auth/callback"]
+redirect_urls = ["https://producer-these-presence-harbor.trycloudflare.com/auth/callback", "https://producer-these-presence-harbor.trycloudflare.com/auth/shopify/callback", "https://producer-these-presence-harbor.trycloudflare.com/api/auth/callback"]
 
 [app_proxy]
-url = "https://mercy-devoted-ambient-educated.trycloudflare.com"
+url = "https://producer-these-presence-harbor.trycloudflare.com"
 subpath = "check"
 prefix = "apps"
 

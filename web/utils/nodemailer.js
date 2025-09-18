@@ -4,14 +4,18 @@ import path from "path";
 
 dotenv.config({ path: path.resolve(process.cwd(), ".env") });
 
-const gmail_user = process.env.GMAIL_USER;
-const gmail_pass = process.env.GMAIL_PASS;
+const smtp_user = process.env.SMTP_USERNAME;
+const smtp_pass = process.env.SMTP_PASSWORD;
+const smtp_host = process.env.SMTP_HOST;
+const smtp_port = process.env.SMTP_PORT;
 
 const transporter = nodemailer.createTransport({
-  service: "gmail",
+  host: smtp_host,
+  port: smtp_port,             
+  secure: (smtp_port === 465 ? true : false),   
   auth: {
-    user: gmail_user,
-    pass: gmail_pass,
+    user: smtp_user,
+    pass: smtp_pass,
   },
 });
 
@@ -72,7 +76,7 @@ export async function sendMail() {
       </div>
     `;
 
-    const info = await transporter.sendMail({
+    await transporter.sendMail({
       from: '"Store Monitor Alert" <s.p.s.a.h.i.l.p.a.n.j.w.a.n.i@gmail.com>',
       to: "sahilpanjwani195@gmail.com",
       subject: "🔔 Store Alert: No Orders in Last 15 Minutes",
